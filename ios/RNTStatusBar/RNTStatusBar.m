@@ -2,13 +2,11 @@
 
 @implementation RNTStatusBar
 
-- (dispatch_queue_t)methodQueue
-{
+- (dispatch_queue_t)methodQueue {
   return dispatch_get_main_queue();
 }
 
-static BOOL RNTViewControllerBasedStatusBarAppearance()
-{
+static BOOL RNTViewControllerBasedStatusBarAppearance() {
   static BOOL value;
   static dispatch_once_t onceToken;
   dispatch_once(&onceToken, ^{

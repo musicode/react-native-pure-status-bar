@@ -1,6 +1,6 @@
 {
   "name": "react-native-pure-status-bar",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "react native status-bar",
   "main": "index.js",
   "scripts": {
