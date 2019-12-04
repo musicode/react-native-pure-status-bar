@@ -1,61 +1,51 @@
-# react-native-pure-dimension
+# react-native-pure-status-bar
 
-This is a module which help you get screen dimension info.
+This is a module which help you set status bar style and show/hide status bar.
 
 ## Installation
 
 ```
-npm i react-native-pure-dimension
+npm i react-native-pure-status-bar
 // link below 0.60
-react-native link react-native-pure-dimension
+react-native link react-native-pure-status-bar
 ```
 
 ## Setup
 
 ### iOS
 
-modify `AppDelegate.m`
-
-```oc
-#import <RNTDimension.h>
-
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
-{
-  ...
-  // add this line
-  [RNTDimension bind:rootView];
-  return YES;
-}
-```
+nothing to do.
 
 ### Android
 
-nothing to do.
+`android/app/src/main/res/values/styles.xml`, make sure `windowTranslucentStatus` is `true`.
+
+```xml
+<resources>
+
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="colorAccent">your color</item>
+    </style>
+
+</resources>
+
+```
 
 ## Usage
 
 ```js
-import dimension from 'react-native-pure-dimension'
+import statusBar from 'react-native-pure-status-bar'
 
-dimension.getStatusBarHeight().then(data => {
-  data.height
-})
+// at first, you must set the status bar style
+// style: set text color, dark | light
+// animated: if the transition to the new style should be animated, ios only
+statusBar.setStyle('dark', true)
 
-dimension.getNavigationBarInfo().then(data => {
-  data.height
-  data.visible
-})
+// Whether to hide status bar
+// animation: fade | slide | none, ios only
+statusBar.setHidden(true, animation)
 
-dimension.getScreenSize().then(data => {
-  data.width
-  data.height
-})
-
-dimension.getSafeArea().then(data => {
-  data.top
-  data.right
-  data.bottom
-  data.left
-})
-
+// Whether to show network activity indicator, ios only
+statusBar.setNetworkActivityIndicatorVisible(true)
 ```

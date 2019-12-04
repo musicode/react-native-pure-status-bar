@@ -5,10 +5,6 @@ const { RNTStatusBar } = NativeModules
 
 export default {
 
-  getHeight() {
-    return RNTStatusBar.getHeight()
-  },
-
   setStyle(style, animated) {
     RNTStatusBar.setStyle(style, animated || false)
   },

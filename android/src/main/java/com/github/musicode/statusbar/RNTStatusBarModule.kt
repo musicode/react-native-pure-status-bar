@@ -11,26 +11,6 @@ class RNTStatusBarModule(private val reactContext: ReactApplicationContext) : Re
     }
 
     @ReactMethod
-    fun getHeight(promise: Promise) {
-
-        val resources = reactApplicationContext.resources
-        val resId = resources.getIdentifier("status_bar_height", "dimen", "android")
-
-        val height = if (resId > 0) {
-            (resources.getDimensionPixelSize(resId) / resources.displayMetrics.density).toInt()
-        }
-        else {
-            0
-        }
-
-        val map = Arguments.createMap()
-        map.putInt("height", height)
-
-        promise.resolve(map)
-
-    }
-
-    @ReactMethod
     fun setStyle(style: String, animated: Boolean) {
 
         val activity = currentActivity ?: return
@@ -38,7 +18,6 @@ class RNTStatusBarModule(private val reactContext: ReactApplicationContext) : Re
         UiThreadUtil.runOnUiThread {
 
             ImmersionBar.with(activity)
-                    .transparentStatusBar()
                     .statusBarDarkFont(style != "light", 0f)
                     .init()
 
