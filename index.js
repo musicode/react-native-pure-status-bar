@@ -5,20 +5,20 @@ const { RNTStatusBar } = NativeModules
 
 export default {
 
-  getStatusBarHeight() {
-    return RNTStatusBar.getStatusBarHeight()
+  getHeight() {
+    return RNTStatusBar.getHeight()
   },
 
-  getNavigationBarInfo() {
-    return RNTStatusBar.getNavigationBarInfo()
+  setStyle(style, animated) {
+    RNTStatusBar.setStyle(style, animated || false)
   },
 
-  getScreenSize() {
-    return RNTStatusBar.getScreenSize()
+  setHidden(hidden, animation) {
+    RNTStatusBar.setHidden(hidden, animation || 'none')
   },
 
-  getSafeArea() {
-    return RNTStatusBar.getSafeArea()
+  setNetworkActivityIndicatorVisible(visible) {
+    RNTStatusBar.setNetworkActivityIndicatorVisible(visible || false)
   },
 
 }

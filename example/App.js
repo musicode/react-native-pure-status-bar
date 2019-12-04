@@ -13,59 +13,140 @@ import {
   ScrollView,
   View,
   Text,
-  StatusBar,
 } from 'react-native';
 
 import {
-  Header,
-  LearnMoreLinks,
   Colors,
-  DebugInstructions,
-  ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
+
+import StatusBar from 'react-native-pure-status-bar'
 
 const App: () => React$Node = () => {
   return (
     <>
-      <StatusBar barStyle="dark-content" />
       <SafeAreaView>
         <ScrollView
           contentInsetAdjustmentBehavior="automatic"
           style={styles.scrollView}>
-          <Header />
-          {global.HermesInternal == null ? null : (
-            <View style={styles.engine}>
-              <Text style={styles.footer}>Engine: Hermes</Text>
-            </View>
-          )}
-          <View style={styles.body}>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Step One</Text>
-              <Text style={styles.sectionDescription}>
-                Edit <Text style={styles.highlight}>App.js</Text> to change this
-                screen and then come back to see your edits.
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>See Your Changes</Text>
-              <Text style={styles.sectionDescription}>
-                <ReloadInstructions />
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Debug</Text>
-              <Text style={styles.sectionDescription}>
-                <DebugInstructions />
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Learn More</Text>
-              <Text style={styles.sectionDescription}>
-                Read the docs to discover what to do next:
-              </Text>
-            </View>
-            <LearnMoreLinks />
-          </View>
+
+          <Text
+            style={styles.button}
+            onPress={() => {
+              StatusBar.getHeight().then(data => {
+                console.log(data)
+              })
+            }}
+          >
+            getBarHeight
+          </Text>
+
+          <Text
+            style={styles.button}
+            onPress={() => {
+              StatusBar.setStyle('light', true)
+            }}
+          >
+            setStyle('light', true)
+          </Text>
+
+          <Text
+            style={styles.button}
+            onPress={() => {
+              StatusBar.setStyle('dark', true)
+            }}
+          >
+            setStyle('dark', true)
+          </Text>
+
+          <Text
+            style={styles.button}
+            onPress={() => {
+              StatusBar.setStyle('light', false)
+            }}
+          >
+            setStyle('light', false)
+          </Text>
+
+          <Text
+            style={styles.button}
+            onPress={() => {
+              StatusBar.setStyle('dark', false)
+            }}
+          >
+            setStyle('dark', false)
+          </Text>
+
+          <Text
+            style={styles.button}
+            onPress={() => {
+              StatusBar.setHidden(true, 'fade')
+            }}
+          >
+            setHidden(true, 'fade')
+          </Text>
+
+          <Text
+            style={styles.button}
+            onPress={() => {
+              StatusBar.setHidden(false, 'fade')
+            }}
+          >
+            setHidden(false, 'fade')
+          </Text>
+
+          <Text
+            style={styles.button}
+            onPress={() => {
+              StatusBar.setHidden(true, 'slide')
+            }}
+          >
+            setHidden(true, 'slide')
+          </Text>
+
+          <Text
+            style={styles.button}
+            onPress={() => {
+              StatusBar.setHidden(false, 'slide')
+            }}
+          >
+            setHidden(false, 'slide')
+          </Text>
+
+          <Text
+            style={styles.button}
+            onPress={() => {
+              StatusBar.setHidden(true, 'none')
+            }}
+          >
+            setHidden(true, 'none')
+          </Text>
+
+          <Text
+            style={styles.button}
+            onPress={() => {
+              StatusBar.setHidden(false, 'none')
+            }}
+          >
+            setHidden(false, 'none')
+          </Text>
+
+          <Text
+            style={styles.button}
+            onPress={() => {
+              StatusBar.setNetworkActivityIndicatorVisible(true)
+            }}
+          >
+            setNetworkActivityIndicatorVisible(true)
+          </Text>
+
+          <Text
+            style={styles.button}
+            onPress={() => {
+              StatusBar.setNetworkActivityIndicatorVisible(false)
+            }}
+          >
+            setNetworkActivityIndicatorVisible(false)
+          </Text>
         </ScrollView>
       </SafeAreaView>
     </>
@@ -109,6 +190,12 @@ const styles = StyleSheet.create({
     paddingRight: 12,
     textAlign: 'right',
   },
+  button: {
+    backgroundColor: '#ff0000',
+    color: '#fff',
+    textAlign: 'center',
+    padding: 20,
+  }
 });
 
 export default App;

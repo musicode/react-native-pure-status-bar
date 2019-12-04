@@ -1,82 +1,77 @@
-//
-//  RNTStatusBar.m
-//  RNTStatusBar
-//
-//  Created by zhujl on 2019/12/3.
-//  Copyright © 2019 finstao. All rights reserved.
-//
-
 #import "RNTStatusBar.h"
 
 @implementation RNTStatusBar
 
+- (dispatch_queue_t)methodQueue
+{
+  return dispatch_get_main_queue();
+}
+
+static BOOL RNTViewControllerBasedStatusBarAppearance()
+{
+  static BOOL value;
+  static dispatch_once_t onceToken;
+  dispatch_once(&onceToken, ^{
+    value = [[[NSBundle mainBundle] objectForInfoDictionaryKey:
+              @"UIViewControllerBasedStatusBarAppearance"] ?: @YES boolValue];
+  });
+
+  return value;
+}
+
 RCT_EXPORT_MODULE(RNTStatusBar);
 
-RCT_EXPORT_METHOD(getStatusBarHeight:(RCTPromiseResolveBlock)resolve reject:(RCTPromiseRejectBlock)reject) {
+RCT_EXPORT_METHOD(getHeight:(RCTPromiseResolveBlock)resolve reject:(RCTPromiseRejectBlock)reject) {
     
-    dispatch_async(dispatch_get_main_queue(), ^{
-        
-        resolve(@{
-          @"height": @(RCTSharedApplication().statusBarFrame.size.height),
-        });
-        
+    resolve(@{
+      @"height": @(RCTSharedApplication().statusBarFrame.size.height),
     });
   
 }
 
-RCT_EXPORT_METHOD(getNavigationBarInfo:(RCTPromiseResolveBlock)resolve reject:(RCTPromiseRejectBlock)reject) {
+RCT_EXPORT_METHOD(setStyle:(NSString *)style animated:(BOOL)animated) {
     
-    dispatch_async(dispatch_get_main_queue(), ^{
-        
-        resolve(@{
-          @"height": @(0),
-          @"visible": @(FALSE),
-        });
-        
-    });
-  
-}
+    if (RNTViewControllerBasedStatusBarAppearance()) {
+      RCTLogError(@"RNTStatusBar module requires that the \
+                  UIViewControllerBasedStatusBarAppearance key in the Info.plist is set to NO");
+    } else {
+    
+        UIStatusBarStyle barStyle = UIStatusBarStyleDefault;
 
-RCT_EXPORT_METHOD(getScreenSize:(RCTPromiseResolveBlock)resolve reject:(RCTPromiseRejectBlock)reject) {
-    
-    dispatch_async(dispatch_get_main_queue(), ^{
-        
-        CGRect bounds = UIScreen.mainScreen.bounds;
-        
-        resolve(@{
-          @"width": @(bounds.size.width),
-          @"height": @(bounds.size.height),
-        });
-        
-    });
-  
-}
-
-RCT_EXPORT_METHOD(getSafeArea:(RCTPromiseResolveBlock)resolve reject:(RCTPromiseRejectBlock)reject) {
-    
-    dispatch_async(dispatch_get_main_queue(), ^{
-        
-        if (appView != nil) {
-            if (@available(iOS 11.0, *)) {
-                resolve(@{
-                    @"top": @(appView.safeAreaInsets.top),
-                    @"bottom": @(appView.safeAreaInsets.bottom),
-                    @"left": @(appView.safeAreaInsets.left),
-                    @"right": @(appView.safeAreaInsets.right)
-                });
-                return;
-            }
+        if ([style isEqualToString:@"light"]) {
+            barStyle = UIStatusBarStyleLightContent;
         }
         
-        resolve(@{
-            @"top": @(0),
-            @"bottom": @(0),
-            @"left": @(0),
-            @"right": @(0)
-        });
-        
-    });
+        [RCTSharedApplication() setStatusBarStyle:barStyle animated:animated];
+      
+    }
   
+}
+
+RCT_EXPORT_METHOD(setHidden:(BOOL)hidden withAnimation:(NSString *)animation) {
+    
+    if (RNTViewControllerBasedStatusBarAppearance()) {
+      RCTLogError(@"RNTStatusBar module requires that the \
+                  UIViewControllerBasedStatusBarAppearance key in the Info.plist is set to NO");
+    } else {
+        
+        UIStatusBarAnimation barAnimation = UIStatusBarAnimationNone;
+        
+        if ([animation isEqualToString:@"fade"]) {
+            barAnimation = UIStatusBarAnimationFade;
+        }
+        else if ([animation isEqualToString:@"slide"]) {
+            barAnimation = UIStatusBarAnimationSlide;
+        }
+        
+        [RCTSharedApplication() setStatusBarHidden:hidden withAnimation:barAnimation];
+        
+    }
+  
+}
+
+RCT_EXPORT_METHOD(setNetworkActivityIndicatorVisible:(BOOL)visible) {
+  RCTSharedApplication().networkActivityIndicatorVisible = visible;
 }
 
 @end
