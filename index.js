@@ -10,11 +10,15 @@ export default {
   },
 
   setHidden(hidden, animation) {
-    RNTStatusBar.setHidden(hidden, animation || 'none')
+    RNTStatusBar.setHidden(hidden, animation || 'slide')
   },
 
   setNetworkActivityIndicatorVisible(visible) {
     RNTStatusBar.setNetworkActivityIndicatorVisible(visible || false)
+  },
+
+  setNavigationBarColor(color) {
+    RNTStatusBar.setNavigationBarColor(color)
   },
 
 }

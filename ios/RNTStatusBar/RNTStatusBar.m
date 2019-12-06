@@ -64,4 +64,10 @@ RCT_EXPORT_METHOD(setNetworkActivityIndicatorVisible:(BOOL)visible) {
   RCTSharedApplication().networkActivityIndicatorVisible = visible;
 }
 
+RCT_EXPORT_METHOD(setNavigationBarColor:(NSString *)color) {
+
+  // android only
+
+}
+
 @end

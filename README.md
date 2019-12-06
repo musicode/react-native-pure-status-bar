@@ -48,4 +48,7 @@ statusBar.setHidden(true, animation)
 
 // Whether to show network activity indicator, ios only
 statusBar.setNetworkActivityIndicatorVisible(true)
+
+// android only
+statusBar.setNavigationBarColor('#ffffff')
 ```
