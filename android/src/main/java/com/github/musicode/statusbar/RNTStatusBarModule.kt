@@ -15,7 +15,7 @@ class RNTStatusBarModule(private val reactContext: ReactApplicationContext) : Re
     }
 
     @ReactMethod
-    fun setStyle(style: String, animated: Boolean) {
+    fun setStyle(style: String) {
 
         val activity = currentActivity ?: return
 
@@ -26,7 +26,7 @@ class RNTStatusBarModule(private val reactContext: ReactApplicationContext) : Re
     }
 
     @ReactMethod
-    fun setHidden(hidden: Boolean, animation: String) {
+    fun setHidden(hidden: Boolean) {
 
         val window = currentActivity?.window ?: return
 
@@ -49,13 +49,6 @@ class RNTStatusBarModule(private val reactContext: ReactApplicationContext) : Re
         navigationBarColor = color
 
         applyChange(activity)
-
-    }
-
-    @ReactMethod
-    fun setNetworkActivityIndicatorVisible(visible: Boolean) {
-
-        // iOS only
 
     }
 

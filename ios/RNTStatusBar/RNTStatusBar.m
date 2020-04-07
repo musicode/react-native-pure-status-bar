@@ -24,7 +24,8 @@ RCT_EXPORT_METHOD(setStyle:(NSString *)style animated:(BOOL)animated) {
   if (RNTViewControllerBasedStatusBarAppearance()) {
     RCTLogError(@"RNTStatusBar module requires that the \
                 UIViewControllerBasedStatusBarAppearance key in the Info.plist is set to NO");
-  } else {
+  }
+  else {
 
     UIStatusBarStyle barStyle = UIStatusBarStyleDefault;
 
@@ -62,12 +63,6 @@ RCT_EXPORT_METHOD(setHidden:(BOOL)hidden withAnimation:(NSString *)animation) {
 
 RCT_EXPORT_METHOD(setNetworkActivityIndicatorVisible:(BOOL)visible) {
   RCTSharedApplication().networkActivityIndicatorVisible = visible;
-}
-
-RCT_EXPORT_METHOD(setNavigationBarColor:(NSString *)color) {
-
-  // android only
-
 }
 
 @end
