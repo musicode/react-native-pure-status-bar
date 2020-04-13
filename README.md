@@ -14,11 +14,16 @@ react-native link react-native-pure-status-bar
 
 ### iOS
 
-nothing to do.
+Modify `ios/<ProjectName>/Info.plist`, make sure `UIViewControllerBasedStatusBarAppearance` is `false`.
+
+```xml
+<key>UIViewControllerBasedStatusBarAppearance</key>
+<false/>
+```
 
 ### Android
 
-`android/app/src/main/res/values/styles.xml`, make sure `windowTranslucentStatus` is `true`.
+Modify `android/app/src/main/res/values/styles.xml`, make sure `windowTranslucentStatus` is `true`.
 
 ```xml
 <resources>
@@ -29,7 +34,6 @@ nothing to do.
     </style>
 
 </resources>
-
 ```
 
 ## Usage
